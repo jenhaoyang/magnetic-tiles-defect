@@ -7,6 +7,7 @@ from fastai.vision.all import (DiceMulti, JaccardCoeff, Resize,
                                SegmentationDataLoaders, aug_transforms,
                                foreground_acc, imagenet_stats, resnet34,
                                unet_learner)
+from mlem.core.metadata import save
 
 
 def get_mask_path(img_path, train_mask_dir_path):
@@ -45,4 +46,5 @@ def train_model(train_img_dir_path,
     learn = unet_learner(dls, resnet34, lr=lr, metrics=[foreground_acc,
                          JaccardCoeff, DiceMulti])
     learn.fine_tune(n_epochs, cbs=[DvcLiveCallback()])
-    learn.export(fname=Path(model_pickle_path).absolute())
+    # learn.export(fname=Path(model_pickle_path).absolute())
+    save(learn, str(Path(model_pickle_path).absolute()))
