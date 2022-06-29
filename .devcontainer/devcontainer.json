@@ -3,6 +3,6 @@
     "build": {
       "dockerfile": "Dockerfile"
     },
-    "extensions": ["Iterative.dvc"],
-    "postCreateCommand": "pip3 install --user -r requirements.txt"
+    "extensions": ["ms-python.python","Iterative.dvc"],
+    "postCreateCommand": "python3 -m dvc pull"
   }
